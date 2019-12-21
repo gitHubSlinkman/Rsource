@@ -1,0 +1,68 @@
+---
+title: "Data Cleaning with R and the Tidyverse: Detecting Missing Values"
+author: "by John Sulivan and Craig W. Slinkman"
+date: "12/21/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is my implementation of John Sullivan's tutorial of how to detect missing values and impute them with the package **mice**.
+
+## My starting point
+
+Dr. Slinkman comment: Before doing anything I always load a R-script where I load my most used R-packages.
+
+This package is located on GitHub at https://github.com/gitHubSlinkman/Rsource.git. The name of the script is **load_packages_v003.R**.  We load it below.
+
+```{r load_packages}
+#
+source('~/R-Projects/Rsource/load_packages_v003.R')
+#
+```
+
+Data cleaning is one of the most important aspects of data science.
+
+As a data scientist, you can expect to spend up to 80% of your time cleaning data.
+
+In a previous post I walked through a number of data cleaning tasks using Python and the Pandas library.
+
+That post got so much attention, I wanted to follow it up with an example in R.
+In this post you’ll learn how to detect missing values using the tidyr and dplyr packages from the Tidyverse.
+
+The Tidyverse is the best collection of R packages for data science, so you should become familiar with it.
+
+Dr. Slinkman comment: I live in the Tidyverse.  While some programmers do not like it (no reference given), it is, in my opinion, a useful tool for the actual data analysis.
+
+Note that the **tidyverse** and **tidyr** packages are loaded by my R-script. **load_packages.R**
+
+## Reading our data set 
+
+I have downloaded the **telecom.csv**.  Note that is a small data set dealing with customer churn. [Wikipedia](https://en.wikipedia.org/wiki/Customer_attrition) defines customer churn as 
+
+>Customer curb, also known as customer attrition, customer churn, customer turnover, or customer defection, is the loss of clients or customers.
+
+Wikipedia goes on to say 
+
+>Banks, telephone service companies, Internet service providers, pay TV companies, insurance firms, and alarm monitoring services, often use customer attrition analysis and customer attrition rates as one of their key business metrics (along with cash flow, EBITDA, etc.) because the cost of retaining an existing customer is far less than acquiring a new one.[1] Companies from these sectors often have customer service branches which attempt to win back defecting clients, because recovered long-term customers can be worth much more to a company than newly recruited clients.
+
+Dr. Slinkman remark:  I try to avoid mixing my R scriptd my data.  My data is stored in the subdurectiry named **data**.  I read the data in the R-code chunk named get_data.
+
+```{r get_data}
+#
+file_path <- file.path( "data",                  # Construct file path ...
+                        "telecom.csv")
+#
+telecom <- read_csv( file_path )                 # I read the data with the tidyverse
+                                                 # read_csv function ...
+#
+telecom
+
+#
+```
+
+
+
+
