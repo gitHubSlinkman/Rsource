@@ -33,7 +33,7 @@ We create a list of duagnostroc plots using the $plot_diagnostics$ function
 
 ```{r make_diagnostic_plots}
 #
-diagPlts<-diagPlot(fit)
+diagnostics <- diagPlot(fit)
 #
 ```
 
@@ -41,12 +41,9 @@ Thus the plot obtained is:
 
 ```{r draw_diagnostics}
 #
-library(grid)                  
-library(gridExtra)
-
-do.call(grid.arrange, 
-        c(diagPlts, 
-          main="Diagnostic Plots", 
-          ncol=3))
-#
+diagnostics$rvfPlot
+diagnostics$qqPlot
+diagnostics$sclLocPlot
+diagnostics$rvlevPlot
+diagnostics$cvlPlot
 ```

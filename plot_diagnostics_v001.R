@@ -36,3 +36,10 @@ diagPlot<-function(model){
     
     return(list(rvfPlot=p1, qqPlot=p2, sclLocPlot=p3, cdPlot=p4, rvlevPlot=p5, cvlPlot=p6))
 }
+3
+draw_plots <- function( plots ){
+      plot_grid( plots$rvfPlot,    plots$qqPlot,
+                 plots$sclLocPlot, plots$cdPlot,
+                 plots$rvlPlot,    cvdPlot,
+                 ncols = 2 )
+}
