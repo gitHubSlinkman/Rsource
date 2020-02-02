@@ -1,0 +1,52 @@
+---
+title: "Test diagnostic plots"
+author: "Craig W. Slinkman"
+date: "2/1/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Test diagnostic plots
+
+We the mtcars dataset, a linear model is fitted with $mpg$ as the response variable 
+```{r prepare_for_test}
+#
+source('load_packages_v003.R')                # Load my fsvorite mackages .,..
+#
+source("plot_qq_norm.R")                      # To draw qq normal plot ...
+#
+source('plot_diagnostics_v001.R')             # To draw diagnostic plots ...
+#
+```
+
+
+```{r fit_model}
+fit<-lm(mpg~cyl+disp+hp+drat+wt, data=mtcars)
+tidy(fit)
+glance(fit)
+```
+
+We create a list of duagnostroc plots using the $plot_diagnostics$ function
+
+```{r make_diagnostic_plots}
+#
+diagPlts<-diagPlot(fit)
+#
+```
+
+Thus the plot obtained is:
+
+```{r draw_diagnostics}
+#
+library(grid)                  
+library(gridExtra)
+
+do.call(grid.arrange, 
+        c(diagPlts, 
+          main="Diagnostic Plots", 
+          ncol=3))
+#
+```

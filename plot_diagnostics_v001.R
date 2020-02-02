@@ -1,15 +1,16 @@
-# plot_diagnostics.R
+# plot_diagnostics_v001.R
+#
+source('~/R-Projects/Rsource/plot_qq_norm.R')
 
-require(ggplot2)
 diagPlot<-function(model){
     p1<-ggplot(model, aes(.fitted, .resid))+geom_point()
     p1<-p1+stat_smooth(method="loess")+geom_hline(yintercept=0, col="red", linetype="dashed")
     p1<-p1+xlab("Fitted values")+ylab("Residuals")
     p1<-p1+ggtitle("Residual vs Fitted Plot")+theme_bw()
     
-    p2<-ggplot(model, aes(qqnorm(.stdresid)[[1]], .stdresid))+geom_point(na.rm = TRUE)
-    p2<-p2+geom_abline(aes(qqline(.stdresid)))+xlab("Theoretical Quantiles")+ylab("Standardized Residuals")
-    p2<-p2+ggtitle("Normal Q-Q")+theme_bw()
+    p2<-plot_qq_norm( residuals(model),
+                      R = 100,
+                      variable_name="Residuals" )
     
     p3<-ggplot(model, aes(.fitted, sqrt(abs(.stdresid))))+geom_point(na.rm=TRUE)
     p3<-p3+stat_smooth(method="loess", na.rm = TRUE)+xlab("Fitted Value")
@@ -17,7 +18,7 @@ diagPlot<-function(model){
     p3<-p3+ggtitle("Scale-Location")+theme_bw()
     
     p4<-ggplot(model, aes(seq_along(.cooksd), .cooksd))+geom_bar(stat="identity", position="identity")
-    p4<-p4+xlab("Obs. Number")+ylab("Cook's distance")
+    p4p4<-p4+xlab("Obs. Number")+ylab("Cook's distance")
     p4<-p4+ggtitle("Cook's distance")+theme_bw()
     
     p5<-ggplot(model, aes(.hat, .stdresid))+geom_point(aes(size=.cooksd), na.rm=TRUE)

@@ -1,4 +1,4 @@
-# compute_dates_v003.R
+# compute_dates_v004.R
 #
 # This function acquires the current date and then computes the dates from 7 days ago,
 # 90 days_ago, 180 days ago, and 365 days ago.
