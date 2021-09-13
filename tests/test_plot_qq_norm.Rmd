@@ -1,0 +1,126 @@
+---
+title: 'Test:  test__plot.norm_qq'
+author: "Craig Slinkman"
+date: "12/15/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Purpose
+
+The plot test series is used to test the function **plot_norm_qq.R**.
+
+## Load required packages and functions
+
+```{r}
+library( tidyverse )                    # I live in the tidy verse ...
+library( cowplot )                      # Useful extensions to ggplot ...
+
+source('D:/R-Projects/Rsource/plot_qq_norm.R')
+
+set.seed( 1127 )
+
+```
+
+
+## Test function plot_norm_qq.R
+
+### Case 1: Normal distribution small sample
+
+```{r}
+y <- rnorm( 16, mean = 70, sd =6 )
+y
+
+plot_qq_norm( variable = y, 
+              variable_name = "Variable y",
+              plot_title = "Small sample test")
+```
+
+### Case 2: Normal distribution with larger number of bootstrap simulations
+
+```{r}
+plot_qq_norm( variable = y, 
+              R = 100,
+              variable_name = "Variable y",
+              plot_title = "Small sample test")
+```
+
+### Case 3: Larger sample size 
+
+```{r}
+y <- rnorm( 100, mean = 80, sd = 6 )
+y
+
+plot_qq_norm( variable = y, 
+              R = 100,
+              variable_name = "Variable y",
+              plot_title = "Large sample normal distribution")
+y
+```
+
+### Case 4: Small sample test with upper tuncation of the normal at 100
+
+```{r}
+score <- rnorm( 25, mean = 75, sd = 10 )
+score <- round( score )
+score
+
+
+plot_qq_norm( variable = score, 
+              R = 100,
+              variable_name = "Exam score",
+              plot_title = "Small sample with truncated upper tail")
+
+```
+
+## Case 6: Laege sample with truncated upper distribution
+
+```{r}
+score <- rnorm( 100, mean = 80, sd = 15 )
+score <- ifelse( score > 100, 100, score)
+
+score <- round( score )
+
+plot_qq_norm( variable = score, 
+              R = 100,
+              variable_name = "Exam Score",
+              plot_title = "Large sample normal distribution truncated at 100")
+
+
+```
+
+## 7: Sall sample Students t distribution with 1 degree of freedom
+
+```{r}
+t <- rt( 25, df = 1 )
+t
+
+
+```
+
+```{r}
+plot_qq_norm( variable = t, 
+              R = 50,
+              variable_name = "Exame Score",
+              plot_title = "Student's t distribution with 1 degree of freedom")
+```
+
+## Lognormal distribution simulated distribution
+
+```{r}
+mu <- log( 55000 )
+sd <- 3.5
+
+income <- exp( rnorm( 100, mean = mu, sd = sd ))
+income <- round( income )
+income
+
+plot_qq_norm( variable = income, 
+              R = 50,
+              variable_name = "Family income",
+              plot_title = "Log normal distribution simulating family income")
+```
+

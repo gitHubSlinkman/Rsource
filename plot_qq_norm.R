@@ -1,4 +1,4 @@
-# 
+
 
 nsim <- function(n, m = 0, s = 1) {
     z <- rnorm(n)
@@ -41,4 +41,8 @@ plot_qq_norm <- function( variable,
             ylab( variable_name ) +
             ggtitle( plot_title ) +
             theme_cowplot()
-    }
+}
+
+
+
+

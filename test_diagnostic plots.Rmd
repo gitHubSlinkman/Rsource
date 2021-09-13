@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 We the mtcars dataset, a linear model is fitted with $mpg$ as the response variable 
 ```{r prepare_for_test}
 #
-source('load_packages_v003.R')                # Load my fsvorite mackages .,..
+source('load_packages_v003.R')                # Load my favorite mackages .,..
 #
 source("plot_qq_norm.R")                      # To draw qq normal plot ...
 #
